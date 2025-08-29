@@ -19,8 +19,8 @@ public class OptionMenu extends Account {
         int x = 1;
         do {
             try {
-                data.put(942482450, 9171);
-                data.put(810986451, 9893);
+                data.put(942486547, 9171);
+                data.put(810754451, 9893);
 
                 System.out.println("WELCOME to the ATM mini Project!");
 
