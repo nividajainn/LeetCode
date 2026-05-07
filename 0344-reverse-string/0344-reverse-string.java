@@ -1,15 +1,15 @@
 class Solution {
     public void reverseString(char[] s) {
-        int i = 0;
-        int j = s.length-1;
+      int start = 0;
+      int end = s.length -1;
 
-        while(i<j){
-            char c = s[i];
-            s[i] = s[j];
-            s[j] = c;
+      while(start<end){
+        char temp = s[start];
+        s[start] = s[end];
+        s[end] = temp;
 
-            i++;
-            j--;
-        }
+        start++;
+        end--;
+      }
     }
 }
