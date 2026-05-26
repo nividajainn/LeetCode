@@ -1,13 +1,18 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-
+        Map<Integer, Integer> map = new HashMap<>();
         for(int i=0; i<nums.length; i++){
-            for(int j=i+1; j<nums.length; j++){
-                if(nums[i] + nums[j] == target){
-                    return new int[] {i, j};
-                }
+            int complement = target-nums[i];
+
+            //agar num hoga map me to hum wo return kara denge 
+            if (map.containsKey(complement)){
+                return new int[]{map.get(complement), i};
+            }
+            //nahi hoga to daal denge aage check ke liye
+            else {
+                map.put(nums[i], i);
             }
         }
-         return new int[] {};
-    }
+        throw new IllegalArgumentException("No match");
+     }
 }
