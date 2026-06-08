@@ -1,30 +1,20 @@
 class Solution {
-   public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
 
-    // set to store unique characters in current window
-    HashSet<Character> set = new HashSet<>();
+        int left = 0, maxLen = 0; 
 
-    int left = 0;        // left pointer of window
-    int maxLength = 0;   // answer
+        for(int right=0; right< s.length(); right++){ 
+            while(set.contains(s.charAt(right))){ //jab tak set me right character hai
+                set.remove(s.charAt(left)); //tab tak left wale character ko remove kro
+                left++;
+            }
 
-    // right pointer expands the window
-    for (int right = 0; right < s.length(); right++) {
+            set.add(s.charAt(right)); //nahi to add karo set me
 
-        // if duplicate character found
-        while (set.contains(s.charAt(right))) {
-            // remove left character to shrink window
-            set.remove(s.charAt(left));
-            left++; // move left forward
+            maxLen = Math.max(maxLen, right-left+1); 
+            //Current window ki length (right - left + 1) aur previous maximum length me se jo bada ho, use maxLen me store karo.
         }
-
-        // add current character (now guaranteed unique)
-        set.add(s.charAt(right));
-
-        // update maximum length
-        maxLength = Math.max(maxLength, right - left + 1);
+        return maxLen;
     }
-
-    // return final answer
-    return maxLength;
-}
 }
