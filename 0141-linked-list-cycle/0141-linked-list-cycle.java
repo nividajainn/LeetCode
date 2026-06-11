@@ -11,18 +11,20 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        if(head == null || head.next == null){
-       //agar pehla ya uske baad wala null hai to false hoga no cycle
+         if(head == null || head.next == null){
+       //agar pehla hi null hai to false hoga no cycle
         return false; 
       }
-        ListNode slow = head, fast = head;
+
+        ListNode fast = head, slow = head;
+
         while(fast != null && fast.next != null){
-            slow = slow.next;
             fast = fast.next.next;
-             
-             if (slow == fast){
+            slow = slow.next;
+
+            if(slow == fast){
                 return true;
-             }
+            }
         }
         return false;
     }
