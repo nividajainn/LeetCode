@@ -1,17 +1,32 @@
-class Solution {
-    public int eraseOverlapIntervals(int[][] intervals) {
-        Arrays.sort(intervals, (a,b) -> a[1]-b[1]);
-        
-        int overlap = intervals[0][1];
-        int count=0;
+import java.util.*;
 
+class Solution {
+
+    public int eraseOverlapIntervals(int[][] intervals) {
+
+        // Sort intervals according to end time
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[1], b[1]));
+
+        // End time of first interval
+        int prevEnd = intervals[0][1];
+
+        // Count of removed intervals
+        int count = 0;
+
+        // Traverse remaining intervals
         for(int i=1; i<intervals.length; i++){
-            if(intervals[i][0] < overlap){
+
+            // Overlap exists
+            if(intervals[i][0] < prevEnd){
+
+                // Remove current interval
                 count++;
             }
+            // No overlap
             else{
-                overlap = intervals[i][1];
-            }    
+                // Keep current interval
+                prevEnd = intervals[i][1];
+            }
         }
         return count;
     }
