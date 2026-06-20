@@ -1,20 +1,10 @@
 class Solution {
     public int singleNonDuplicate(int[] nums) {
-        int low = 0, high = nums.length - 1;
+        int ans = 0;
 
-        while (low < high) {
-            int mid = (low + high) / 2;
-
-            // make mid even
-            if (mid % 2 == 1) mid--;
-
-            if (nums[mid] == nums[mid + 1]) {
-                low = mid + 2;   // single element right side
-            } else {
-                high = mid;      // single element left side (including mid)
-            }
+        for(int i=0; i<nums.length; i++){
+            ans ^= nums[i];
         }
-
-        return nums[low];
+        return ans;
     }
 }
