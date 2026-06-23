@@ -1,24 +1,31 @@
 class Solution {
+
     public int[] topKFrequent(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-      
-      //num ki frequency ko 1 se increase karo (agar pehle nahi hai to 0 se start karo)
-        for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        // Count frequency
+        for(int num : nums){
+            map.put(num, map.getOrDefault(num,0)+1);
         }
 
-        // Step 2: list of unique elements
-        List<Integer> list = new ArrayList<>(map.keySet());
+        // Min Heap based on frequency
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[1] - b[1]);
 
-        // Step 3: sort based on frequency (high to low)
-        Collections.sort(list, (a, b) -> map.get(b) - map.get(a));
+        for(int key : map.keySet()){
 
-        // Step 4: pick first k elements
-        int[] ans = new int[k];
-        for (int i = 0; i < k; i++) {
-            ans[i] = list.get(i);
+            pq.add(new int[]{key, map.get(key) });
+
+            if(pq.size() > k){
+                pq.poll();
+            }
         }
+        
+        int ans[] = new int[k];
 
+        for(int i=k-1;i>=0;i--){
+            ans[i] = pq.poll()[0];
+        }
         return ans;
     }
 }
