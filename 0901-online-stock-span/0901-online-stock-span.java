@@ -1,34 +1,30 @@
 class StockSpanner {
 
    // Stack stores {price, span}
-    Stack<int[]> st;
+    Stack<Integer> st;
+    HashMap<Integer, Integer> map; 
 
     // Constructor
     public StockSpanner() {
         st = new Stack<>();
-    }
+        map = new HashMap<>();
+    } 
 
     public int next(int price) {
 
-        // Every new price has at least a span of 1 (today itself)
         int span = 1;
 
-        // Remove all previous prices that are
-        // less than or equal to the current price
-        while (!st.isEmpty() && st.peek()[0] <= price) {
+        while (!st.isEmpty() && st.peek() <= price) {
 
-            // Add the span of the popped price
-            span += st.peek()[1];
-
-            // Remove it from the stack
+            span += map.get(st.peek()); // Get span from HashMap
             st.pop();
         }
 
-        // Push current price and its calculated span
-        st.push(new int[]{price, span});
+        st.push(price);
+        map.put(price, span);
 
-        // Return today's span
         return span;
+    
     }
 }
 
