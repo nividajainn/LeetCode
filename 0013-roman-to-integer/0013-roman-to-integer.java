@@ -9,21 +9,25 @@ class Solution {
         map.put('D', 500);
         map.put('M', 1000);
         char chars[] = s.toCharArray(); //given string to array 
-         int result = 0;
-         int i, j;
+        int result = map.get(chars[chars.length-1]);
+        
          //i j pointer 0 or 1 me 
-         for(i=0, j=1; j<chars.length; i++, j++){
+         for(int i=chars.length-2 ; i>=0 ;i--){
             //agar i bada hoga j se to add karenge
-            if(map.get(chars[i])>= map.get(chars[j])){
-                result = result + map.get(chars[i]);
+            if(map.get(chars[i])< map.get(chars[i+1])){
+                result = result - map.get(chars[i]);
             }
             //nahi to sub
             else{
-                 result = result - map.get(chars[i]);
+                result = result + map.get(chars[i]);
             }
          }
-         //or baki ko add kar do
-         result += map.get(chars[i]);
+        //  //or baki ko add kar do
+        //  result += map.get(chars[i]);
+
          return result;
     }
 }
+//time and space complexity is O(n)
+//TC coz iterating through the ip string
+//SC using hashmap
